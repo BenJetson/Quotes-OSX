@@ -11,6 +11,8 @@
 		9EBB6668245E0F0500FFA84D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBB6667245E0F0500FFA84D /* ViewController.swift */; };
 		9EBB666A245E0F0700FFA84D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EBB6669245E0F0700FFA84D /* Assets.xcassets */; };
 		9EBB666D245E0F0700FFA84D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EBB666B245E0F0700FFA84D /* Main.storyboard */; };
+		9EBB6676245E25CD00FFA84D /* QuotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBB6675245E25CD00FFA84D /* QuotesViewController.swift */; };
+		9EBB6678245E29A500FFA84D /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBB6677245E29A500FFA84D /* Quote.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +23,8 @@
 		9EBB666C245E0F0700FFA84D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9EBB666E245E0F0700FFA84D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9EBB666F245E0F0700FFA84D /* Quotes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Quotes.entitlements; sourceTree = "<group>"; };
+		9EBB6675245E25CD00FFA84D /* QuotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesViewController.swift; sourceTree = "<group>"; };
+		9EBB6677245E29A500FFA84D /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,8 @@
 				9EBB666B245E0F0700FFA84D /* Main.storyboard */,
 				9EBB666E245E0F0700FFA84D /* Info.plist */,
 				9EBB666F245E0F0700FFA84D /* Quotes.entitlements */,
+				9EBB6675245E25CD00FFA84D /* QuotesViewController.swift */,
+				9EBB6677245E29A500FFA84D /* Quote.swift */,
 			);
 			path = Quotes;
 			sourceTree = "<group>";
@@ -133,7 +139,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EBB6678245E29A500FFA84D /* Quote.swift in Sources */,
 				9EBB6668245E0F0500FFA84D /* ViewController.swift in Sources */,
+				9EBB6676245E25CD00FFA84D /* QuotesViewController.swift in Sources */,
 				9EBB6666245E0F0500FFA84D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
