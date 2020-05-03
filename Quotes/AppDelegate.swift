@@ -13,6 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     let popover = NSPopover()
+    var eventMonitor: EventMonitor?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
@@ -22,6 +23,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         // constructMenu()
+        
+        setupEventMonitor()
         
         popover.contentViewController = QuotesViewController.freshController()
     }
@@ -44,14 +47,30 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        statusItem.menu = menu
 //    }
     
+    func setupEventMonitor() {
+        let mask: NSEvent.EventTypeMask = [
+            NSEvent.EventTypeMask.leftMouseDown,
+            NSEvent.EventTypeMask.rightMouseDown,
+        ]
+        
+        let handler: (NSEvent?) -> Void = {
+            [weak self] (event: NSEvent?) -> Void in
+                self?.hidePopover(sender: event)
+        }
+        
+        eventMonitor = EventMonitor(mask: mask, handler: handler)
+    }
+    
     func showPopover(sender: Any?) {
         if let button = statusItem.button {
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+            eventMonitor?.start()
         }
     }
     
     func hidePopover(sender: Any?) {
         popover.performClose(sender)
+        eventMonitor?.stop()
     }
     
     @objc func togglePopover(_ sender: Any?) {
