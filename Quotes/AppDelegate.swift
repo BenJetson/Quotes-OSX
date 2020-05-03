@@ -13,17 +13,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     let popover = NSPopover()
+    let menu = NSMenu()
     var eventMonitor: EventMonitor?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         if let button = statusItem.button {
             button.image = NSImage(named: NSImage.Name("StatusBarButtonImage"))
-            button.action = #selector(togglePopover(_:))
+            button.action = #selector(statusItemClicked(_:))
+            button.sendAction(on: [.leftMouseUp, .rightMouseUp])
         }
         
-        // constructMenu()
-        
+        constructMenu()
         setupEventMonitor()
         
         popover.contentViewController = QuotesViewController.freshController()
@@ -33,19 +34,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
-//    func constructMenu() {
-//        let menu = NSMenu()
-//
-//        menu.addItem(NSMenuItem(title: "Print Quote",
-//                                action: #selector(AppDelegate.togglePopover(_:)),
-//                                keyEquivalent: "P"))
-//        menu.addItem(NSMenuItem.separator())
-//        menu.addItem(NSMenuItem(title: "Quit Quotes",
-//                                action: #selector(NSApplication.terminate(_:)),
-//                                keyEquivalent: "q"))
-//
-//        statusItem.menu = menu
-//    }
+    func constructMenu() {
+        menu.addItem(NSMenuItem(title: "Show Quote",
+                                action: #selector(AppDelegate.togglePopover(_:)),
+                                keyEquivalent: "P"))
+        menu.addItem(NSMenuItem.separator())
+        menu.addItem(NSMenuItem(title: "Quit Quotes",
+                                action: #selector(NSApplication.terminate(_:)),
+                                keyEquivalent: "q"))
+    }
     
     func setupEventMonitor() {
         let mask: NSEvent.EventTypeMask = [
@@ -78,6 +75,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             hidePopover(sender: sender)
         } else {
             showPopover(sender: sender)
+        }
+    }
+    
+    @objc func statusItemClicked(_ sender: Any?) {
+        let event = NSApp.currentEvent!
+        
+        switch event.type {
+        case NSEvent.EventType.rightMouseUp:
+            statusItem.popUpMenu(menu)
+        default:
+            togglePopover(sender)
         }
     }
 }
